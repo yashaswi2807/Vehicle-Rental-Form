@@ -37,7 +37,7 @@ function StepDateRange({ formData, setFormData, prevStep }) {
       };
 
       await api.post('/bookings', payload);
-      setSuccess('✅ Booking successful!');
+      setSuccess('Booking successful!');
     } catch (err) {
       console.error(err);
       setError(err?.response?.data?.message || 'Something went wrong');
