@@ -3,7 +3,7 @@ const app = express();
 
 // ✅ Manually set CORS headers
 app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "*"); // allow all for development
+  res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   next();
 });
