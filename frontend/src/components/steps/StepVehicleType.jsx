@@ -54,7 +54,7 @@ function StepVehicleType({ formData, setFormData, nextStep, prevStep }) {
                   setFormData({
                     ...formData,
                     vehicleTypeId: e.target.value,
-                    vehicleId: '', // reset model when type changes
+                    vehicleId: '',
                   })
                 }
               />
