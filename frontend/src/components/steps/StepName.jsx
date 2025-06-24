@@ -1,99 +1,54 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useState } from 'react';
 
-const StepName = ({ formData, setFormData, onNext }) => {
+function StepName({ formData, setFormData, nextStep }) {
+  const [error, setError] = useState('');
+
   const handleNext = () => {
-    if (!formData.firstName || !formData.lastName) {
-      alert('Please enter both first and last name');
+    if (!formData.firstName.trim() || !formData.lastName.trim()) {
+      setError('Please enter both first and last name');
       return;
     }
-    onNext();
+    setError('');
+    nextStep();
   };
 
   return (
-    <div
-      style={{
-        minHeight: '100vh',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        padding: '2rem',
-        background: 'linear-gradient(135deg, #f6f8fc, #d8f5f3)',
-      }}
-    >
-      <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
-        style={{
-          background: '#ffffffcc',
-          backdropFilter: 'blur(12px)',
-          borderRadius: '30px',
-          padding: '3rem',
-          width: '100%',
-          maxWidth: '750px',
-          boxShadow: '0 12px 40px rgba(0, 0, 0, 0.1)',
-        }}
-      >
-        <div className="text-center mb-5">
-          <h2
-            className="fw-bold"
-            style={{
-              fontSize: '2.5rem',
-              color: '#2c3e50',
-              fontWeight: 700,
-            }}
-          >
-            What's your name?
-          </h2>
-          <p style={{ color: '#55667c', fontSize: '1rem' }}>
-            Please enter your full name to begin the rental process
-          </p>
-        </div>
+    <div>
+      <h5>What is your name?</h5>
 
-        <div className="row g-4 mb-4">
-          <div className="col">
-            <input
-              type="text"
-              className="form-control form-control-lg"
-              placeholder="First Name"
-              value={formData.firstName}
-              onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
-              style={{ borderRadius: '12px', border: '1px solid #d1d9e6' }}
-            />
-          </div>
-          <div className="col">
-            <input
-              type="text"
-              className="form-control form-control-lg"
-              placeholder="Last Name"
-              value={formData.lastName}
-              onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
-              style={{ borderRadius: '12px', border: '1px solid #d1d9e6' }}
-            />
-          </div>
-        </div>
+      <div className="mb-3">
+        <label className="form-label">First Name</label>
+        <input
+          type="text"
+          className="form-control"
+          value={formData.firstName}
+          onChange={(e) =>
+            setFormData({ ...formData, firstName: e.target.value })
+          }
+        />
+      </div>
 
-        <div className="text-end">
-          <button
-            onClick={handleNext}
-            className="btn px-5 py-2"
-            style={{
-              background: 'linear-gradient(to right, #ff6ec4, #7873f5)',
-              color: 'white',
-              fontWeight: 500,
-              fontSize: '1rem',
-              borderRadius: '50px',
-              border: 'none',
-              boxShadow: '0 6px 20px rgba(0,0,0,0.1)',
-            }}
-          >
-            Next →
-          </button>
-        </div>
-      </motion.div>
+      <div className="mb-3">
+        <label className="form-label">Last Name</label>
+        <input
+          type="text"
+          className="form-control"
+          value={formData.lastName}
+          onChange={(e) =>
+            setFormData({ ...formData, lastName: e.target.value })
+          }
+        />
+      </div>
+
+      {error && <div className="alert alert-danger">{error}</div>}
+
+      <div className="text-end">
+        <button className="btn btn-primary" onClick={handleNext}>
+          Next
+        </button>
+      </div>
     </div>
   );
-};
+}
 
 export default StepName;
