@@ -17,7 +17,7 @@ It uses **React**, **Bootstrap**, **Framer Motion** on the frontend and **Expres
 * Dynamic data fetching from database (via Prisma)
 * Step validation + alerts
 * Date overlap validation to prevent double bookings
-* Final success screen with confirmation
+* Final success confirmation
 * Elegant UI (gradient, animated transitions, progress indicators)
 
 ---
