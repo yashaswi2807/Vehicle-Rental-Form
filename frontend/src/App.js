@@ -70,7 +70,6 @@ totalSteps={totalSteps}
     <div className="container mt-5">
       <h2 className="text-center mb-4">Vehicle Booking Form</h2>
 
-      {/* 🔵 Step Progress Tracker */}
       <div className="d-flex justify-content-center gap-3 mb-4">
         {Array.from({ length: totalSteps }).map((_, index) => (
           <div
@@ -88,8 +87,6 @@ totalSteps={totalSteps}
           </div>
         ))}
       </div>
-
-      {/* 📦 Render the current step */}
       <div className="card p-4 shadow-sm">{steps[step]}</div>
     </div>
   );
