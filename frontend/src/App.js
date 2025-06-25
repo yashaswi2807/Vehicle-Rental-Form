@@ -8,6 +8,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   const [step, setStep] = useState(0);
+  const totalSteps = 5;
+
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -19,16 +21,75 @@ function App() {
   });
 
   const steps = [
-    <StepName formData={formData} setFormData={setFormData} nextStep={() => setStep(step + 1)} />,
-    <StepWheels formData={formData} setFormData={setFormData} nextStep={() => setStep(step + 1)} prevStep={() => setStep(step - 1)} />,
-    <StepVehicleType formData={formData} setFormData={setFormData} nextStep={() => setStep(step + 1)} prevStep={() => setStep(step - 1)} />,
-    <StepVehicleModel formData={formData} setFormData={setFormData} nextStep={() => setStep(step + 1)} prevStep={() => setStep(step - 1)} />,
-    <StepDateRange formData={formData} setFormData={setFormData} prevStep={() => setStep(step - 1)} />,
+    <StepName
+  formData={formData}
+  setFormData={setFormData}
+  onNext={() => setStep(step + 1)}
+  step={step + 1}
+  totalSteps={totalSteps}
+/>,
+
+<StepWheels
+formData={formData}
+setFormData={setFormData}
+onNext={() => setStep(step + 1)}
+onBack={() => setStep(step - 1)}
+step={step + 1}
+totalSteps={totalSteps}
+/>,
+
+<StepVehicleType
+formData={formData}
+setFormData={setFormData}
+onNext={() => setStep(step + 1)}
+onBack={() => setStep(step - 1)}
+step={step + 1}
+totalSteps={totalSteps}
+/>,
+
+<StepVehicleModel
+formData={formData}
+setFormData={setFormData}
+onNext={() => setStep(step + 1)}
+onBack={() => setStep(step - 1)}
+step={step + 1}
+totalSteps={totalSteps}
+/>,
+
+<StepDateRange
+formData={formData}
+setFormData={setFormData}
+onBack={() => setStep(step - 1)}
+step={step + 1}
+totalSteps={totalSteps}
+/>,
+
   ];
 
   return (
     <div className="container mt-5">
       <h2 className="text-center mb-4">Vehicle Booking Form</h2>
+
+      {/* 🔵 Step Progress Tracker */}
+      <div className="d-flex justify-content-center gap-3 mb-4">
+        {Array.from({ length: totalSteps }).map((_, index) => (
+          <div
+            key={index}
+            className={`rounded-circle d-flex align-items-center justify-content-center ${index <= step ? 'bg-success' : 'bg-light'}`}
+            style={{
+              width: '35px',
+              height: '35px',
+              color: index <= step ? 'white' : '#6c757d',
+              fontWeight: 'bold',
+              border: '1px solid #ccc',
+            }}
+          >
+            {index + 1}
+          </div>
+        ))}
+      </div>
+
+      {/* 📦 Render the current step */}
       <div className="card p-4 shadow-sm">{steps[step]}</div>
     </div>
   );
